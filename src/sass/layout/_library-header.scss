@@ -1,7 +1,7 @@
 .library-header {
   padding-top: 40px;
   padding-bottom: 62px;
-  background-color: #545454;
+  background-color: $bg-footer;
 
   background-image: linear-gradient(rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
     url('../images/photo_header_library_mob.jpg');
@@ -93,11 +93,11 @@
   bottom: 3px;
 }
 
-.library-btn__list {
+.library__btn-list {
   @include centeredFlex;
 }
 
-.library-btn__item:not(:last-child) {
+.library__btn-item:not(:last-child) {
   margin-right: 20px;
 
   @include tablet {
