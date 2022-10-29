@@ -1,3 +1,5 @@
+// ИНПУТ name="searchQuery" !!!
+
 import { refs } from './refs';
 import { clearGallery } from './supportFunctions';
 import { getSearchMovies, renderMoviesGallery } from './API/search-movies';
