@@ -1,27 +1,38 @@
+// Switcher
 .theme-switcher {
-  margin-left: 20px;
-  margin-right: auto;
+  .header__section & {
+    position: absolute;
+    top: -30px;
+    right: 20px;
+    @include tablet {
+      top: -30px;
+      right: 28px;
+    }
+  }
   position: relative;
   cursor: pointer;
 }
-// Switcher
+
 .theme-switcher__thumb {
-  transition: 0.5s;
+  transition: $transition-duration;
   position: absolute;
   top: 1px;
   left: 25px;
   box-shadow: 1px 1px 2px $color-accent, 0 0 1em $color-text-light,
     0 0 0.2em $color-text-lighter;
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background-color: $color-accent;
   box-sizing: border-box;
   transform: translateX(0);
-  transition: 0.5s;
+  @include tablet {
+    width: 22px;
+    height: 22px;
+  }
 
   &--after {
-    transition: 0.5s;
+    transition: $transition-duration;
     position: absolute;
     top: 1px;
     left: 2px;
@@ -37,22 +48,122 @@
   padding: 0;
   border-radius: 12px;
   border: none;
-  width: 50px;
-  height: 24px;
+  width: 45px;
+  height: 20px;
   padding: 0px 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include centeredFlex;
+  gap: 5px;
   cursor: pointer;
+  background-color: $bg-body;
+  @include tablet {
+    width: 50px;
+    height: 25px;
+  }
 }
 
 .theme-switcher__icon {
   display: block;
   margin-left: auto;
-  fill: #000;
+  fill: $color-text;
+  @include tablet {
+    width: 20px;
+    height: 20px;
+  }
 }
 
+// Light theme background
+body {
+  background-color: $bg-body;
+  transition: background-color $transition-duration $transition-animation;
+}
+
+// Dark theme colors
+// body
 body.dark-theme {
-  background-color: $color-text;
-  transition: 0.45s;
+  background-color: #272e36;
+  transition: background-color $transition-duration $transition-animation;
+
+  //   main header bg-img
+  & .header {
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.56),
+        rgba(0, 0, 0, 0.56)
+      ),
+      url(../images/main-header/main-header-bg-mobile-1x.jpg);
+    @include retina {
+      background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/main-header/main-header-bg-mobile-2x.jpg);
+    }
+    @include tablet {
+      background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/main-header/main-header-bg-tablet-1x.jpg);
+      @include retina {
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.56),
+            rgba(0, 0, 0, 0.56)
+          ),
+          url(../images/main-header/main-header-bg-tablet-2x.jpg);
+      }
+    }
+    @include desktop {
+      background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0.56),
+          rgba(0, 0, 0, 0.56)
+        ),
+        url(../images/main-header/main-header-bg-desktop-1x.jpg);
+      @include retina {
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.56),
+            rgba(0, 0, 0, 0.56)
+          ),
+          url(../images/main-header/main-header-bg-desktop-2x.jpg);
+      }
+    }
+  }
+
+  //   swithcer
+  & .theme-switcher__btn {
+    background-color: #272e36;
+  }
+
+  & .theme-switcher__icon {
+    fill: $color-text-lighter;
+  }
+
+  //   gallery
+  & .gallery-list__poster {
+    box-shadow: 0px 1px 5px 0px rgba(255, 255, 255, 0.75);
+  }
+  & .gallery-list__title {
+    color: $color-text-lighter;
+  }
+
+  & .gallery-list__genres {
+    color: $color-accent;
+  }
+
+  & .gallery-list__genres::after {
+    background-color: $color-accent;
+  }
+
+  & .gallery-list__year {
+    color: $color-accent;
+  }
+
+  //   footer
+  & footer {
+    background-color: #262d35;
+  }
 }
