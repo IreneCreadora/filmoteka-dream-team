@@ -26,6 +26,9 @@
     }
   }
 }
+.header__section {
+  position: relative;
+}
 
 .header__nav-container {
   @include centeredFlex();
@@ -38,6 +41,7 @@
 
 .header__list {
   @include centeredFlex();
+  align-items: baseline;
 }
 
 .header__item {
