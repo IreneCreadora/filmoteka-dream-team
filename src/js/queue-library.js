@@ -6,6 +6,7 @@ import { createMarkupWhenLocalStorageEmpty } from './watched-library';
 const KEY_QUEUE_MOVIES = 'queueMovies';
 const queueGallery = refs.libraryGallery;
 
+//
 if (refs.btnLibraryQueue) {
   refs.btnLibraryQueue.addEventListener('click', onOpenQueueLibrary);
 }
