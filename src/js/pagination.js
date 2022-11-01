@@ -1,5 +1,5 @@
 import { getTrendingMovies, createMarkup } from './API/get-trending';
-import { getSearchMovies, renderMoviesGallery } from './API/search-movies';
+import { getSearchMovies } from './API/search-movies';
 import { refs } from './refs';
 const paginationBox = document.querySelector('.pagination-container')
 paginationBox.addEventListener('click', handlerPagination)
@@ -20,7 +20,7 @@ export default function pagination(currentPage, allPages) {
     globalCurrentpage = currentPage;
 
     if (currentPage > 1) {
-        markup += `<li class="pagination-button arrow-left"></li>`
+        markup += `<li class="pagination-button">< Previous</li>`
     }
     if (currentPage > 1) {
         markup += `<li class="pagination-button">1</li>`
@@ -51,7 +51,8 @@ export default function pagination(currentPage, allPages) {
 
     if (allPages > currentPage) {
         markup += `<li class="pagination-button">${allPages}</li>`
-        markup += `<li class="pagination-button arrow-right"><li>`
+        markup += `<li class="pagination-button">Next ></li>`
+
     }
 
     paginationBox.innerHTML = markup;
@@ -63,31 +64,38 @@ function handlerPagination(evt) {
     if (evt.target.nodeName !== 'LI') {
         return
     }
-    if (evt.target.textContent === "🡸") {
-        //console.log(evt.target.textContent);
+
+
+    if (evt.target.textContent === 'Next >') {
+        globalCurrentPage = page;
+
         if (searchValue) {
-            getSearchMovies(searchValue, globalCurrentPage -= 1).then(data => {
+            getSearchMovies(searchValue, (globalCurrentpage += 1)).then(data => {
                 refs.galleryMovies.innerHTML = data.map(createMarkup);
-            })
-            return
+            });
+            return;
         }
-        getTrendingMovies(globalCurrentPage -= 1, globalCurrentpage).then(data => {
+        getTrendingMovies((globalCurrentpage += 1)).then(data => {
             refs.galleryMovies.innerHTML = data.map(createMarkup);
-        })
+        });
         return;
     }
-    if (evt.target.textContent === "🡺") {
+
+    if (evt.target.textContent === '< Previous') {
+        globalCurrentPage = page;
+
         if (searchValue) {
-            getSearchMovies(globalCurrentpage += 1, page).then(data => {
+            getSearchMovies(searchValue, (globalCurrentpage -= 1)).then(data => {
                 refs.galleryMovies.innerHTML = data.map(createMarkup);
-            })
-            return
+            });
+            return;
         }
-        getTrendingMovies(globalCurrentPage += 1, globalCurrentpage).then(data => {
+        getTrendingMovies((globalCurrentpage -= 1)).then(data => {
             refs.galleryMovies.innerHTML = data.map(createMarkup);
-        })
+        });
         return;
     }
+
     if (evt.target.textContent === "...") {
         return
     }
